@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+demo-output/
+demo-evidence/
+output/
+private-data/
+*.zip
+.env
+.env.*

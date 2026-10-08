@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "title": "示例项目系统知识库（完全虚构）",
+  "version": "1.0",
+  "sources": [
+    {"id": "manual", "title": "示例项目系统手册", "version": "1.0", "filename": "fictional-manual.md"}
+  ],
+  "images": [],
+  "cards": [
+    {
+      "id": "DEMO_DRAFT_EDIT", "type": "operation", "title": "项目管理 / 编辑草稿",
+      "scope": {"system": "示例项目系统", "roles": ["经办人"], "manual_scope": "demo_operator"},
+      "source_refs": [{"source_id": "manual", "locator": "第2章 草稿编辑"}],
+      "questions": ["草稿填错了怎么修改？"], "keywords": ["编辑草稿", "修改项目"],
+      "summary": "草稿状态可编辑后保存。", "preconditions": ["项目处于草稿状态。"],
+      "steps": [{"text": "打开项目并点击编辑。"}, {"text": "修改后保存。"}],
+      "limitations": ["本章没有说明已提交项目是否可修改。"]
+    },
+    {
+      "id": "DEMO_PRODUCT_SPEC", "type": "product", "title": "示例 M-100 / 额定电压",
+      "scope": {"system": "示例产品目录", "roles": ["M-100 型号"], "manual_scope": "demo_m100"},
+      "source_refs": [{"source_id": "manual", "locator": "第3章 产品规格"}],
+      "questions": ["M-100 的额定电压是多少？"], "keywords": ["M-100", "额定电压"],
+      "summary": "示例额定电压为 24 V。",
+      "limitations": ["这是虚构测试数据，不代表任何真实产品。", "本条不适用于其他型号。"]
+    },
+    {
+      "id": "DEMO_ARCHIVED_EDIT", "type": "rule", "title": "项目归档后的修改规则",
+      "scope": {"system": "示例项目系统", "roles": ["经办人"], "manual_scope": "demo_operator"},
+      "source_refs": [{"source_id": "manual", "locator": "第4章 不完整说明"}],
+      "evidence_status": "pending",
+      "summary": "归档后操作规则待确认。",
+      "limitations": ["来源只有未完成句，不能据此推定可编辑。"]
+    }
+  ],
+  "image_exclusions": [],
+  "issues": [
+    {"id": "ISSUE_ARCHIVED", "card_ids": ["DEMO_ARCHIVED_EDIT"], "question": "归档后的项目允许哪些操作？", "evidence": "原文只有“项目归档后：”，没有后续规则。"}
+  ],
+  "evaluation_cases": [
+    {"id": "Q_DRAFT", "query": "草稿填错了怎么修改？", "scope": "demo_operator", "expected_card_ids": ["DEMO_DRAFT_EDIT"], "expected_facts": ["仅有草稿编辑依据", "修改后保存"], "negative_constraints": ["不要扩展成任何状态都可编辑"]},
+    {"id": "Q_PRODUCT", "query": "M-100 的额定电压是多少？", "scope": "demo_m100", "expected_card_ids": ["DEMO_PRODUCT_SPEC"], "expected_facts": ["24 V", "虚构示例"]},
+    {"id": "Q_UNKNOWN", "query": "归档以后还能编辑吗？", "scope": "demo_operator", "expected_card_ids": [], "expected_facts": ["资料不足"], "negative_constraints": ["不得编造归档后可编辑的规则"]}
+  ]
+}

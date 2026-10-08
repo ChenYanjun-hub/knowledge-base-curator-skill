@@ -1,0 +1,4 @@
+interface:
+  display_name: "知识库资料整理"
+  short_description: "核对系统手册与图文来源，整理可检索知识卡并生成可维护的完整交付包"
+  default_prompt: "请使用 $knowledge-base-curator 核对并整理这些知识资料，保留操作条件与配图，输出带来源的 Markdown、图片备份和待确认清单。"
